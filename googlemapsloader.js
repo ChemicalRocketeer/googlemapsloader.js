@@ -10,6 +10,7 @@ if (!window.jQuery) {
     // set the api key to use
     function useKey(key) {
       if (typeof key === 'string') apiKey = key;
+      return window.google_maps_loader;
     }
 
     // require one or more maps api elements
@@ -36,6 +37,7 @@ if (!window.jQuery) {
           callback();
         }
       }
+      return window.google_maps_loader;
     }
 
     function alreadyRequired(reqs) {
