@@ -1,0 +1,47 @@
+<!doctype HTML>
+<html>
+  <head>
+    <script src="https://code.jquery.com/jquery-2.2.2.min.js" integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI=" crossorigin="anonymous"></script>
+    <script src="googlemapsloader.js"></script>
+    <script src="mapskey.js"></script> <!-- hidden in gitignore. Should assign your api key to window.maps_key for testing purposes -->
+    <script>
+      google_maps_loader.useKey(maps_key);
+      google_maps_loader.require([], function() {
+        console.log('require with no reqs: ' + (google.maps ? 'pass' : 'fail'));
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: -34.397, lng: 150.644},
+          zoom: 8
+        });
+      });
+    </script>
+    <script>
+      google_maps_loader.require(['places', 'geometry'], function() {
+        console.log('multi require: ' + (google.maps.places && google.maps.geometry ? 'pass' : 'fail'));
+      });
+    </script>
+    <script>
+      google_maps_loader.require('places', function() {
+        console.log('redundant single string require: ' + (google.maps.places ? 'pass' : 'fail'));
+      });
+    </script>
+    <script>
+      google_maps_loader.require('drawing', function() {
+        console.log('unique single string require: ' + (google.maps.drawing ? 'pass' : 'fail'));
+      });
+    </script>
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map">
+    </div>
+  </body>
+</html>
