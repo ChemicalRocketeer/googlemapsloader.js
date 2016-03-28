@@ -91,6 +91,7 @@ if (!window.jQuery) {
     });
 
     return {
+      signIn: signIn,
       useKey: useKey,
       require: require
     };
