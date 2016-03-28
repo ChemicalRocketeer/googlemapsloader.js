@@ -82,6 +82,7 @@ if (!window.jQuery) {
         var query = basicQuery;
         var options = [];
         var libs = required.join(',');
+        if (signedIn) options.push('signed_in=true');
         if (libs.length) options.push('libraries=' + libs);
         if (apiKey) options.push('key=' + apiKey);
         options.push('callback=google_maps_callback');
