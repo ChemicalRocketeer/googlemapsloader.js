@@ -5,7 +5,7 @@
     <script src="googlemapsloader.js"></script>
     <script src="mapskey.js"></script> <!-- hidden in gitignore. Should assign your api key to window.maps_key for testing purposes -->
     <script>
-      google_maps_loader.useKey(maps_key).require([], function() {
+      google_maps_loader.useKey(maps_key).require(function() {
         console.log('require with no reqs: ' + (google.maps ? 'pass' : 'fail'));
         var map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: -34.397, lng: 150.644},
