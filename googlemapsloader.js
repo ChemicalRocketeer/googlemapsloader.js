@@ -66,7 +66,7 @@ if (!window.jQuery) {
 
     function callListeners() {
       for (var i = 0; i < listeners.length; i++) {
-        listeners[i]();
+        setTimeout(listeners[i], 0);
       }
     }
 
