@@ -13,28 +13,36 @@ if (!window.jQuery) {
       return window.google_maps_loader;
     }
 
-    // require one or more maps api elements
-    function require(reqs, callback) {
-      // force reqs to an array
-      if (typeof reqs === 'string') reqs = [reqs];
-      else if (!jQuery.isArray(reqs)) return;
-
-      if (state === 'loaded' && !alreadyRequired(reqs)) {
-        console.warn('google_maps_loader already loaded. Could not load libraries ' + reqs.toString());
-      } else if (state === 'idle') {
-        for (var i = 0; i < reqs.length; i++) {
-          if (jQuery.inArray(reqs[i], required) === -1) {
-            required.push(reqs[i]);
+    // require one or more maps api elements. Arguments are a callback function and one or more google libraries to load. Both are optional.
+    function require() {
+      var callback;
+      var reqs = [];
+      for (var i = 0; i < arguments.length; i++) {
+        var arg = arguments[i];
+        if (typeof arg === 'function') {
+          callback = arg;
+        } else if (typeof arg === 'string') {
+          reqs.push(arg);
+        } else if (jQuery.isArray(arg)) {
+          reqs = reqs.concat(arg);
+        }
+      }
+      if (reqs && reqs.length) {
+        if (state === 'loaded' || state === 'loading') {
+          console.warn('google_maps_loader.require is being called after the maps script has been fetched. There is no guarantee your required libraries will be loaded.');
+        } else {
+          for (var i = 0; i < reqs.length; i++) {
+            if (jQuery.inArray(reqs[i], required) === -1) {
+              required.push(reqs[i]);
+            }
           }
         }
-        if (typeof callback === 'function') {
-          listeners.push(callback);
-        }
-      } else if (typeof callback === 'function') {
-        if (state === 'loading') {
-          listeners.push(callback);
-        } else {
+      }
+      if (callback) {
+        if (state === 'loaded') {
           callback();
+        } else {
+          listeners.push(callback);
         }
       }
       return window.google_maps_loader;

@@ -14,17 +14,17 @@
       });
     </script>
     <script>
-      google_maps_loader.require(['places', 'geometry'], function() {
+      google_maps_loader.require('places', 'geometry', function() {
         console.log('multi require: ' + (google.maps.places && google.maps.geometry ? 'pass' : 'fail'));
       });
     </script>
     <script>
-      google_maps_loader.require('places', function() {
-        console.log('redundant single string require: ' + (google.maps.places ? 'pass' : 'fail'));
-      });
+      google_maps_loader.require(function() {
+        console.log('redundant single string swapped require: ' + (google.maps.places ? 'pass' : 'fail'));
+      }, 'places');
     </script>
     <script>
-      google_maps_loader.require('drawing', function() {
+      google_maps_loader.require(['drawing'], function() {
         console.log('unique single string require: ' + (google.maps.drawing ? 'pass' : 'fail'));
       });
     </script>
