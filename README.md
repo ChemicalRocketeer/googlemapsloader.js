@@ -14,7 +14,11 @@ To require a google library, use `window.google_maps_loader.require([library[, l
 ```
 <script src="googlemapsloader.js"></script>
 <script>
-  google_maps_loader.require([library[, library[, ...]], [callback]);
+  google_maps_loader.require('places', 'geometry', function() {
+    console.log(typeof google.maps.places); // object
+    console.log(typeof google.maps.geometry); // object
+    console.log(typeof google.maps.drawing); // undefined
+  });
 </script>
 ```
 Be sure to call google_maps_loader functions before `$(document).on('ready')`, or your requirements won't make it into the maps API request.
