@@ -5,6 +5,7 @@ if (!window.jQuery) {
     var apiKey;
     var required = [];
     var listeners = [];
+    var signedIn = false;
     var state = 'idle';
 
     // set the api key to use
@@ -46,6 +47,11 @@ if (!window.jQuery) {
         }
       }
       return window.google_maps_loader;
+    }
+
+    function signIn(value) {
+      if (typeof value === 'undefined') value = true;
+      signedIn = value;
     }
 
     function alreadyRequired(reqs) {
