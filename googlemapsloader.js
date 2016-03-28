@@ -75,7 +75,7 @@ if (!window.jQuery) {
       callListeners();
     };
 
-    jQuery(document).ready(function() {
+    jQuery(function() {
       state = 'loading';
       setTimeout(function() {
         var basicQuery = 'https://maps.googleapis.com/maps/api/js';
