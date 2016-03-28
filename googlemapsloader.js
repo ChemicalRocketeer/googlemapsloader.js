@@ -52,6 +52,7 @@ if (!window.jQuery) {
     function signIn(value) {
       if (typeof value === 'undefined') value = true;
       signedIn = value;
+      return window.google_maps_loader;
     }
 
     function alreadyRequired(reqs) {
@@ -69,7 +70,7 @@ if (!window.jQuery) {
       }
     }
 
-    google_maps_callback = function() {
+    window.google_maps_callback = function() {
       state = 'loaded';
       callListeners();
     };
