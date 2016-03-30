@@ -1,0 +1,32 @@
+<!doctype HTML>
+<html>
+  <head>
+    <script src="https://code.jquery.com/jquery-2.2.2.min.js" integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI=" crossorigin="anonymous"></script>
+    <script src="../googlemapsloader.js"></script>
+    <script src="../mapskey.js"></script> <!-- hidden in gitignore. Should assign your api key to window.maps_key for testing purposes -->
+    <script>
+      google_maps_loader.useKey(maps_key).useVersion('3.22').require(function() {
+        var versionSuccessful = !google.maps.LatLng.prototype.toJSON // LatLng.prototype.toJSON was added in 3.23
+        console.log('loading with custom version: ' + (versionSuccessful ? 'pass' : 'fail'));
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: -34.397, lng: 150.644},
+          zoom: 8
+        });
+      });
+    </script>
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map">
+    </div>
+  </body>
+</html>

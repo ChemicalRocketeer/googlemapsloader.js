@@ -3,9 +3,10 @@ if (!window.jQuery) {
 } else if (!window.google_maps_loader) {
   window.google_maps_loader = (function() {
     var apiKey;
+    var signedIn = false;
+    var version;
     var required = [];
     var listeners = [];
-    var signedIn = false;
     var state = 'idle';
 
     // set the api key to use
@@ -55,6 +56,13 @@ if (!window.jQuery) {
       return window.google_maps_loader;
     }
 
+    function useVersion(value) {
+      if (typeof value === 'string') {
+        version = value;
+      }
+      return window.google_maps_loader;
+    }
+
     function alreadyRequired(reqs) {
       for (var i = 0; i < reqs.length; i++) {
         if (jQuery.inArray(reqs[i], required) === -1) {
@@ -81,10 +89,10 @@ if (!window.jQuery) {
         var basicQuery = 'https://maps.googleapis.com/maps/api/js';
         var query = basicQuery;
         var options = [];
-        var libs = required.join(',');
-        if (signedIn) options.push('signed_in=true');
-        if (libs.length) options.push('libraries=' + libs);
         if (apiKey) options.push('key=' + apiKey);
+        if (version) options.push('v=' + version);
+        if (signedIn) options.push('signed_in=true');
+        if (required.length) options.push('libraries=' + required.join(','));
         options.push('callback=google_maps_callback');
         query += '?' + options.join('&');
         jQuery.getScript(query);
@@ -92,6 +100,7 @@ if (!window.jQuery) {
     });
 
     return {
+      useVersion: useVersion,
       signIn: signIn,
       useKey: useKey,
       require: require

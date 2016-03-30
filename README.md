@@ -28,3 +28,6 @@ Make sure Google gets your API key by calling `google_maps_loader.useKey(API_KEY
 
 ###signIn
 If you want to use Google Maps signed in, call the `google_maps_loader.signIn()` function.
+
+###useVersion
+To use a specific version of Google Maps, call `google_maps_loader.useVersion(version)` where version is a string containing a Maps version.
