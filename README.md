@@ -31,3 +31,6 @@ If you want to use Google Maps signed in, call the `google_maps_loader.signIn()`
 
 ###useVersion
 To use a specific version of Google Maps, call `google_maps_loader.useVersion(version)` where version is a string containing a Maps version.
+
+### useLanguage
+To specify a language for Google Maps, call `google_maps_loader.useLanguage(language)` where language is the language code. Full list of languages [here](https://developers.google.com/maps/faq#languagesupport).

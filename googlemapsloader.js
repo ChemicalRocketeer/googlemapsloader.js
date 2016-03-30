@@ -4,7 +4,7 @@ if (!window.jQuery) {
   window.google_maps_loader = (function() {
     var apiKey;
     var signedIn = false;
-    var version;
+    var version, language;
     var required = [];
     var listeners = [];
     var state = 'idle';
@@ -63,6 +63,13 @@ if (!window.jQuery) {
       return window.google_maps_loader;
     }
 
+    function useLanguage(lang) {
+      if (typeof lang === 'string') {
+        language = lang;
+      }
+      return window.google_maps_loader
+    }
+
     function alreadyRequired(reqs) {
       for (var i = 0; i < reqs.length; i++) {
         if (jQuery.inArray(reqs[i], required) === -1) {
@@ -92,6 +99,7 @@ if (!window.jQuery) {
         if (apiKey) options.push('key=' + apiKey);
         if (version) options.push('v=' + version);
         if (signedIn) options.push('signed_in=true');
+        if (language) options.push('language=' + language);
         if (required.length) options.push('libraries=' + required.join(','));
         options.push('callback=google_maps_callback');
         query += '?' + options.join('&');
@@ -100,6 +108,7 @@ if (!window.jQuery) {
     });
 
     return {
+      useLanguage: useLanguage,
       useVersion: useVersion,
       signIn: signIn,
       useKey: useKey,
