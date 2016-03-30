@@ -34,3 +34,6 @@ To use a specific version of Google Maps, call `google_maps_loader.useVersion(ve
 
 ### useLanguage
 To specify a language for Google Maps, call `google_maps_loader.useLanguage(language)` where language is the language code. Full list of languages [here](https://developers.google.com/maps/faq#languagesupport).
+
+### useRegion
+To specify a region for Google Maps, call `google_maps_loader.useRegion(region)` where region is a region code as described [here](https://developers.google.com/maps/documentation/javascript/basics#Region).

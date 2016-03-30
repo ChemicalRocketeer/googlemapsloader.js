@@ -2,9 +2,7 @@ if (!window.jQuery) {
   console.warn('google_maps_loader requires jQuery, but jQuery is not loaded.');
 } else if (!window.google_maps_loader) {
   window.google_maps_loader = (function() {
-    var apiKey;
-    var signedIn = false;
-    var version, language;
+    var signedIn, apiKey, version, language, region;
     var required = [];
     var listeners = [];
     var state = 'idle';
@@ -67,7 +65,14 @@ if (!window.jQuery) {
       if (typeof lang === 'string') {
         language = lang;
       }
-      return window.google_maps_loader
+      return window.google_maps_loader;
+    }
+
+    function useRegion(reg) {
+      if (typeof reg === 'string') {
+        region = reg;
+      }
+      return window.google_maps_loader;
     }
 
     function alreadyRequired(reqs) {
@@ -100,6 +105,7 @@ if (!window.jQuery) {
         if (version) options.push('v=' + version);
         if (signedIn) options.push('signed_in=true');
         if (language) options.push('language=' + language);
+        if (region) options.push('region=' + region);
         if (required.length) options.push('libraries=' + required.join(','));
         options.push('callback=google_maps_callback');
         query += '?' + options.join('&');
@@ -108,6 +114,7 @@ if (!window.jQuery) {
     });
 
     return {
+      useRegion: useRegion,
       useLanguage: useLanguage,
       useVersion: useVersion,
       signIn: signIn,
